@@ -1,0 +1,36 @@
+[33mcommit 5e4275481f79ee03cb0d646b833bc8eb8c13770e[m[33m ([m[1;36mHEAD[m[33m -> [m[1;32mmaster[m[33m, [m[1;31morigin/master[m[33m)[m
+Author: Li Jar <davidbeljar@gmail.com>
+Date:   Tue Mar 19 13:26:35 2024 +0900
+
+    added codes
+
+[33mcommit 3a2235358cb6e2423b325bd7f77b61383b2ada86[m
+Merge: ad62bc1 d7ca4dd
+Author: Li Jar <davidbeljar@gmail.com>
+Date:   Mon Mar 18 16:33:32 2024 +0900
+
+    Merge branch 'master' of github.com:davidlijar/anygrow3
+
+[33mcommit ad62bc1d10aedce082573d835f900b4f50dc72e1[m
+Author: Li Jar <davidbeljar@gmail.com>
+Date:   Mon Mar 18 16:32:03 2024 +0900
+
+    add requirements.txt
+
+[33mcommit d7ca4dd91468f52bd501a119f103902a70c48bdd[m
+Author: 리자 <133189076+davidlijar@users.noreply.github.com>
+Date:   Mon Mar 18 16:27:20 2024 +0900
+
+    Update index.html
+
+[33mcommit 6be136a67349cebd2ced8d991b26da820f5c0741[m
+Author: Li Jar <davidbeljar@gmail.com>
+Date:   Mon Mar 18 15:42:12 2024 +0900
+
+    commit anygrow3
+
+[33mcommit 21aed5f5169f3dd244d2f3890d4ae08116f57273[m
+Author: Li Jar <davidbeljar@gmail.com>
+Date:   Mon Mar 18 15:39:03 2024 +0900
+
+    first commit

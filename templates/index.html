@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Anygrow3 BY LI JAR</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <script src="https://kit.fontawesome.com/cffeb392a9.js" crossorigin="anonymous"></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.3.1/socket.io.js"></script>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css.css') }}">
+    <script src="{{ url_for('static', filename='js.js') }}"></script>
+
+</head>
+
+<body>
+    <div class="container fixed-top">
+
+        <nav class="navbar bg-body-tertiary  shadow-lg p-3 mb-5 bg-body-tertiary rounded ">
+            <div class="container-fluid">
+                <div class="navbar-brand">
+                    <i class="fa-solid fa-seedling" style="font-size: 2rem;color: green;"></i>
+
+                    <span style="font-size: 2rem;color: green;">Anygrow III<figcaption class="blockquote-footer"
+                            style="font-size: 1rem;padding-top:1rem ;">
+                            re-develoved by<cite title="Source Title"><a
+                                    href="https://github.com/davidlijar/anygrow3/tree/master" target="_blank"
+                                    title="download source code">LI JAR</a>
+                            </cite>
+                        </figcaption></span>
+                </div>
+
+                <ul class="nav justify-content-end">
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="#monitoring">모니터링</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#ledController">LED 컨트롤러</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#setting">설정</a>
+                    </li>
+
+                </ul>
+            </div>
+        </nav>
+
+
+    </div>
+
+
+    <div id="monitoring" class="container text-center shadow" style="height: 100vh;">
+
+
+
+        <div class="row align-items-center ">
+            <div class="col progress-container">
+                <div class="progress shadow" role="progressbar" aria-label="Success example" aria-valuenow="25"
+                    aria-valuemin="0" aria-valuemax="100">
+                    <div class="progress-bar bg-danger  " id="temp-bar" style="width: 0%">0%</div>
+                </div>
+                <div class="progress shadow" role="progressbar" aria-label="Info example" aria-valuenow="50"
+                    aria-valuemin="0" aria-valuemax="100">
+                    <div class="progress-bar bg-warning  text-dark" id="humi-bar" style="width: 0%">0%</div>
+                </div>
+                <div class="progress shadow" role="progressbar" aria-label="Warning example" aria-valuenow="75"
+                    aria-valuemin="0" aria-valuemax="100">
+                    <div class="progress-bar shadow bg-success  text-dark" id="co2-bar" style="width: 0%">0%</div>
+                </div>
+                <div class="progress shadow" role="progressbar" aria-label="Danger example" aria-valuenow="75"
+                    aria-valuemin="0" aria-valuemax="100">
+                    <div class="progress-bar shadow bg-info  text-dark" id="ill-bar" style="width: 0%">0%</div>
+                </div>
+            </div>
+
+            <div class="col text-start sensor-data">
+                <div class="sensor-data">
+                    <h3 id="temp">온도[°C] </h3>
+                </div>
+                <div class="sensor-data">
+                    <h3 id="humi">습도[%] </h3>
+                </div>
+                <div class="sensor-data">
+                    <h3 id="co2">이산화 탄소[ppm] </h3>
+                </div>
+                <div class="sensor-data">
+                    <h3 id="ill">조명[lx] </h3>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <div id="ledController" class="container shadow" style="height: 100vh;">
+        <div class="lightbulb">
+            <a><i id="lightbulb" class="fa-solid fa-lightbulb"></i></a>
+        </div>
+
+        <div class="led-btns">
+            <button type="button" class="btn btn-outline-success" onclick="ledHandler(event)"
+                value="ON,#FFD43B">ON</button>
+            <button type="button" class="btn btn-outline-warning" onclick="ledHandler(event)"
+                value="MOOD,#F9DE95">MOOD</button>
+            <button type="button" class="btn btn-outline-danger" onclick="ledHandler(event)" value="OFF,">OFF</button>
+        </div>
+
+    </div>
+
+
+    <div id="setting" class="container shadow" style="height: 100vh;">
+        <div class="setting-container">
+            <div class="row align-middle shadow" style="width: 80%;padding: 2rem;">
+                <div class="row">
+                    <div class="col">
+
+                        <h3 style="display: inline;">식물 : </h3><input style="width: 7rem; height: 2.2rem;" />
+                    </div>
+                    <div class="col" style="margin-right: -20rem;">
+                        <div class="input-group">
+                            <span class="input-group-text">시작일 | 수확일자</span>
+                            <input type="text" id="ill-min" class="form-control">
+                            <input type="text" id="ill-max" class="form-control">
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <button type="button" class="btn btn-outline-primary" style="width: 90.5%;">SAVE</button>
+                </div>
+            </div>
+
+
+            <div class="row shadow" style="width: 80%; padding: 3rem;">
+
+                <div class="row  ">
+                    <div class="col">
+                        <h3>온도</h3>
+                    </div>
+                    <div class="col" style="margin-right: -20rem;">
+                        <div class="input-group">
+                            <span class="input-group-text">최소 | 최대 [°C]</span>
+                            <input type="text" id="temp-min" class="form-control">
+                            <input type="text" id="temp-max" class="form-control">
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col">
+                        <h3>습도</h3>
+                    </div>
+                    <div class="col" style="margin-right: -20rem;">
+                        <div class="input-group">
+                            <span class="input-group-text">최소 | 최대 [%]</span>
+                            <input type="text" id="humi-min" class="form-control">
+                            <input type="text" id="humi-max" class="form-control">
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col">
+                        <h3>이산화 탄소</h3>
+                    </div>
+                    <div class="col" style="margin-right: -20rem;">
+                        <div class="input-group">
+                            <span class="input-group-text">최소 | 최대 [ppm]</span>
+                            <input type="text" id="co2-min" class="form-control">
+                            <input type="text" id="co2-max" class="form-control">
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col">
+                        <h3>조명</h3>
+                    </div>
+                    <div class="col" style="margin-right: -20rem;">
+                        <div class="input-group">
+                            <span class="input-group-text">최소 | 최대 [lx]</span>
+                            <input type="text" id="ill-min" class="form-control">
+                            <input type="text" id="ill-max" class="form-control">
+
+
+                        </div>
+
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col"></div>
+                    <div class="col">
+                        <div class="alarm-btns">
+
+                            <button onclick="reset_alarm()" type="button" class="btn btn-outline-primary">알람을
+                                재설정</button>
+                            <button onclick="set_alarm()" type="button" class="btn btn-outline-primary">알람</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+
+
+
+
+
+
+
+
+
+
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"
+        integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js"
+        integrity="sha384-0pUGZvbkm6XF6gxjEnlmuGrJXVbNuzT9qBBavbLwCsOGabYfZo0T0to5eqruptLy"
+        crossorigin="anonymous"></script>
+</body>
+
+</html>

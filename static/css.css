@@ -1,0 +1,48 @@
+
+.nav-link{
+    color: green;
+    font-weight: 500;
+}
+
+.progress-container{
+    transform: rotate(-90deg);
+    width: 80%;
+    margin-top: 300px;
+    /* margin-right: 100px; */
+  } 
+.progress-container .progress{
+    margin: 50px;
+    height: 50px;
+}
+.sensor-data{
+    margin-left: 5rem;
+}
+
+.lightbulb{
+    position: relative;
+    top: 25%;
+    left: 40%;
+}
+.fa-lightbulb{
+    text-shadow: 4px 4px 10px rgb(20, 20, 20);
+    font-size: 200px;
+}
+.led-btns{
+    position: relative;
+    top: 50%;
+    left: 40%;
+}
+
+.setting-container{
+    position: relative;
+    top: 30%;
+    left: 10%;
+}
+.setting-container .row{
+    margin-bottom: 2rem;
+}
+
+.setting-container .input-group{
+    margin-left: -25rem;
+}
+
